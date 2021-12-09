@@ -1,0 +1,28 @@
+<html lang="en">
+    <head>
+        <title>Trust Payments Testing</title>
+    </head>
+    <body>
+        <div id="st-popup" class="st-popup"></div>
+        <div id="st-notification-frame"></div>
+        <form id="st-form" action="https://4e8000.ngrok.io/submit" method="POST">
+            <div id="st-card-number"></div>
+            <div id="st-expiration-date"></div>
+            <div id="st-security-code"></div>
+            <button id="btn-pay" type="submit">Pay securely</button>
+        </form>
+        <script src=https://webservices.securetrading.net/js/v3/st.js></script>
+        <script>
+            (function() {
+                var st = SecureTrading({
+                    jwt : '{{ token }}',
+                    buttonId: 'btn-pay',
+                });
+                st.Components();
+                st.on('error', () => console.error("An error occurred"))
+                st.on('submit', (data) => console.error("Form Submitted:", data))
+                st.on('success', () => console.error("Success"))
+            })();
+        </script>
+    </body>
+</html>
